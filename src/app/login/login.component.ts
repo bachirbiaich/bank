@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    $("#connectButton").removeClass("btn-info");
+    $("#connectButton").removeClass("btn-info btn-danger");
     $("#connectButton").addClass("btn-warning");
     $("#connectButton").html('<i class="fa fa-circle-o-notch fa-spin"></i> Connexion');
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     }
     else{
       $("#connectButton").removeClass("btn-warning");
-      $("#connectButton").addClass("btn-info");
+      $("#connectButton").addClass("btn-danger");
       $("#connectButton").html('Connexion');
     }
   }
