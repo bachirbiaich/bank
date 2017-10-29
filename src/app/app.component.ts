@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ErrorsService } from './Services/errors/errors.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  errors:Array<String> = ErrorsService.getErrorsStorage();
 }
