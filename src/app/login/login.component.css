@@ -8,3 +8,11 @@
     border-radius: 7px;
     color: #31b0d5;
 }
+.input-group-addon{
+    background-color: #31b0d5;
+    border: none;
+    color: white;
+}
+.input-group input{
+    border:none;
+}
