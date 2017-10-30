@@ -11,7 +11,7 @@
                 <i class="fa fa-times"></i>
             </span>
         </span>
-        <a *ngFor="let menuItem of menuItems" href="{{menuItem.route}}" class="list-group-item" [ngClass]="{'currentRoute': menuItem.route == currentRoute }">
+        <a *ngFor="let menuItem of menuItems" (click)="navigateTo(menuItem.route)" class="list-group-item cursor" [ngClass]="{'currentRoute': menuItem.route == currentRoute }">
             <i class="fa fa-{{menuItem.faIconClass}}"></i> {{menuItem.name}}
         </a>
     </div>     

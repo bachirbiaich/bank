@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       //Redirection avec timeout pour faire sevi
       setTimeout(() => {
         this.router.navigate(['/dashboard']);
-    }, 1500);  //5s
+      }, 1500);  //5s
       
     }
     else{

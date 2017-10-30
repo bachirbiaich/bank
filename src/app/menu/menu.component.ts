@@ -37,6 +37,10 @@ export class MenuComponent implements OnInit {
       })      
   }
 
+  navigateTo(route:string){
+    this.router.navigate([route]);
+  }
+
   logout(){
     console.log("logout");
     this.router.navigate(['/login']);

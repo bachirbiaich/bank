@@ -57,8 +57,12 @@
   }
 
   #logoutBtn{
-    border-radius : 7px !important;
+    border-radius: 7px !important;
     margin-top: 20px;
+  }
+
+  .cursor{
+    cursor: pointer;
   }
 
   .currentRoute{
