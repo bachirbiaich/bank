@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ErrorsService } from '../Services/errors/errors.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -38,11 +39,13 @@ export class MenuComponent implements OnInit {
   }
 
   navigateTo(route:string){
+    ErrorsService.clearErrorsOnHTML();
     this.router.navigate([route]);
   }
 
   logout(){
     console.log("logout");
+    ErrorsService.clearErrorsOnHTML();
     this.router.navigate(['/login']);
   }
 
