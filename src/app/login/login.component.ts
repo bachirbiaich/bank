@@ -26,6 +26,11 @@ export class LoginComponent implements OnInit {
 
     if(this.inputOk()){
       //authentification : todo
+      //Redirection avec timeout pour faire sevi
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+    }, 1500);  //5s
+      
     }
     else{
       $("#connectButton").removeClass("btn-warning");

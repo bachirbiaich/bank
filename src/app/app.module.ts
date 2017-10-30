@@ -4,22 +4,32 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
-/*Components*/
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-
 /*Services*/
 import { ErrorsService } from './Services/errors/errors.service';
 
+/*Components*/
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MenuComponent } from './menu/menu.component';
+import { VirementsComponent } from './virements/virements.component';
+
+
+
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'virements', component: VirementsComponent },
   { path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    MenuComponent,
+    VirementsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
