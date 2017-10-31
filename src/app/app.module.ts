@@ -13,11 +13,15 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { VirementsComponent } from './virements/virements.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material';
 
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'virements', component: VirementsComponent },
   { path: '**', redirectTo: 'login'}
@@ -29,13 +33,17 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     MenuComponent,
-    VirementsComponent
+    VirementsComponent,
+    RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [ErrorsService],
   bootstrap: [AppComponent]
