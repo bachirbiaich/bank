@@ -5,7 +5,7 @@
         <br>
         <div class="input-group">
           <div class="input-group-addon">@</div>
-          <input type="mail" name="mail" class="form-control" placeholder="Email" [(ngModel)]="mail" required="true">
+          <input type="email" name="mail" class="form-control" placeholder="Email" [(ngModel)]="mail" required="true">
         </div>
         <br>
         <div class="input-group">
@@ -13,7 +13,7 @@
             <input type="password" name="password" class="form-control" placeholder="Code secret" [(ngModel)]="password" required="true">
         </div>
         <br>
-        <button id="connectButton" class="btn btn-lg btn-info btn-block" type="submit">Connexion</button>
+        <button [ngClass]="formIsOk ? 'btn btn-lg btn-info btn-block' : 'btn btn-lg btn-danger btn-block'" type="submit"><i [hidden]='!isFetching' class="a fa-circle-o-notch fa-spin"></i> Connexion</button>
     </form>
   </div>
 </div>
