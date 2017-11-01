@@ -16,7 +16,6 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { VirementsComponent } from './virements/virements.component';
-import { RegisterComponent } from './register/register.component';
 
 
 
@@ -35,7 +34,6 @@ const appRoutes: Routes = [
     DashboardComponent,
     MenuComponent,
     VirementsComponent,
-    RegisterComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
