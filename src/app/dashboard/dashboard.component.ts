@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   comptes:Array<Compte> = [];
   mouvement:Array<Mouvement> = [];
   
-  constructor(private router:Router) { }
+  constructor(private router:Router) {}
 
   ngOnInit() {
     //todo : charger les comptes de l'utilisateur et les mettre dans this.compte

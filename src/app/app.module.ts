@@ -3,12 +3,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './Classes/Jwt/token.interceptor';
+import { JwtInterceptor } from './Classes/Jwt/jwt.interceptor';
+import { Router } from '@angular/router';
 
 /*Services*/
 import { ErrorsService } from './Services/errors/errors.service';
 import { SessionService } from './Services/session/session.service';
 import { ApiService } from './Services/api/api.service';
 import { UserService } from './Services/api/user/user.service';
+import { CompteService } from './Services/api/compte/compte.service';
 
 /*Components*/
 import { AppComponent } from './app.component';
@@ -41,7 +46,23 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ErrorsService, SessionService, ApiService, UserService],
+  providers: [
+    ErrorsService, 
+    SessionService, 
+    ApiService, 
+    UserService, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+      deps: [Router]
+    }],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }
