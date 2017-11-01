@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ErrorsService } from '../Services/errors/errors.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { LoginResponse } from '../Interfaces/LoginResponse';
+import { AuthenticationService } from '../Services/authentication/authentication.service';
 
 @Component({
   selector: 'login',
@@ -17,24 +19,31 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
+    if(AuthenticationService.isLoggedIn())
+      this.router.navigate(['/dashboard']);
     this.isFetching = false;
     this.formIsOk = true;
   }
 
   login(): void {
+    this.formIsOk = true;
     this.isFetching = true;
     if (this.inputOk()) {
-      // authentification : todo
-      // Redirection avec timeout pour faire sevi
       const body = { username: this.mail, password: this.password};
       this.http
-      .post('http://localhost:1339/login', body)
-      .subscribe((response) => {
-        console.log(response);
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']);
-        }, 1500);  // 5s
-      });
+      .post<LoginResponse>('http://localhost:1339/login', body)
+      .subscribe(
+        data => {
+          AuthenticationService.startSession(data.user,data.token);
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1000);
+        },
+        err => {
+          this.formIsOk = false;
+          this.isFetching = false;
+          ErrorsService.addErrorOnHTML("Login ou mot de passe incorrect");
+        });
       } else {
         this.isFetching = false;
         this.formIsOk = false;

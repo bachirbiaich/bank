@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorsService } from '../Services/errors/errors.service';
+import { AuthenticationService } from '../Services/authentication/authentication.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -22,6 +23,8 @@ export class MenuComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(!AuthenticationService.isLoggedIn())
+      this.router.navigate(['/login']);
     $(function(){
       
         $('#slide-submenu').on('click',function() {			        
@@ -44,7 +47,7 @@ export class MenuComponent implements OnInit {
   }
 
   logout(){
-    console.log("logout");
+    AuthenticationService.endSession();
     ErrorsService.clearErrorsOnHTML();
     this.router.navigate(['/login']);
   }

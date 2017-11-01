@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 /*Services*/
 import { ErrorsService } from './Services/errors/errors.service';
+import { AuthenticationService } from './Services/authentication/authentication.service';
 
 /*Components*/
 import { AppComponent } from './app.component';
@@ -14,14 +15,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { VirementsComponent } from './virements/virements.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material';
+
 
 
 const appRoutes: Routes = [
-  { path: 'login', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'virements', component: VirementsComponent },
   { path: '**', redirectTo: 'login'}
@@ -35,17 +34,14 @@ const appRoutes: Routes = [
     MenuComponent,
     VirementsComponent,
     RegisterComponent,
-    HomeComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatTabsModule
+    HttpClientModule
   ],
-  providers: [ErrorsService],
+  providers: [ErrorsService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

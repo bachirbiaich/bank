@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Compte } from '../Classes/compte';
+import { Mouvement } from '../Classes/mouvement';
+import { AuthenticationService } from '../Services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard',
@@ -6,10 +10,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  comptes:Array<Compte> = [];
+  mouvement:Array<Mouvement> = [];
+  
+  constructor(private router:Router) { }
 
   ngOnInit() {
+    //todo : charger les comptes de l'utilisateur et les mettre dans this.compte
   }
 
 }
