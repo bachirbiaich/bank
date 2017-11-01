@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ErrorsService } from '../Services/errors/errors.service';
 import { SessionService } from '../Services/session/session.service';
 import * as $ from 'jquery';
+import { User } from '../Classes/user';
 
 @Component({
   selector: 'bc-menu',
@@ -18,15 +19,18 @@ export class MenuComponent implements OnInit {
 
   currentRoute:string;
 
-  constructor(private router: Router) {
-    this.currentRoute = this.router.url;
-   }
+  user:User;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     if(!SessionService.isLoggedIn())
       this.router.navigate(['/login']);
+    this.currentRoute = this.router.url;
+    this.user = SessionService.getLoggedInUser();
+
+    //Jquery menu
     $(function(){
-      
         $('#slide-submenu').on('click',function() {			        
               $(this).closest('.list-group').fadeOut('slide',function(){
                 $('.mini-submenu').fadeIn();	

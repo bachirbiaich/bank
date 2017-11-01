@@ -20,13 +20,13 @@ export class SessionService {
     return sessionStorage.getItem('token');
   }
 
-  static getLoggedInUser():User|boolean{
+  static getLoggedInUser():User{
     if(SessionService.isLoggedIn()){
       const jsonUser = JSON.parse(sessionStorage.getItem('user'));
       return new User(jsonUser._id,jsonUser.firstname,jsonUser.lastname,jsonUser.mail,jsonUser.password);
     }
     else
-      return false;
+      return null;
   }
 
   static isLoggedIn():boolean{
