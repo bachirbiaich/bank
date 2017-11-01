@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorsService } from '../Services/errors/errors.service';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { LoginResponse } from '../Interfaces/LoginResponse';
-import { AuthenticationService } from '../Services/authentication/authentication.service';
+import { SessionService } from '../Services/session/session.service';
+import { UserService } from '../Services/api/user/user.service';
 
 @Component({
   selector: 'login',
@@ -16,10 +15,10 @@ export class LoginComponent implements OnInit {
   public isFetching: boolean;
   public formIsOk: boolean;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private userService:UserService) { }
 
   ngOnInit() {
-    if(AuthenticationService.isLoggedIn())
+    if(SessionService.isLoggedIn())
       this.router.navigate(['/dashboard']);
     this.isFetching = false;
     this.formIsOk = true;
@@ -29,25 +28,25 @@ export class LoginComponent implements OnInit {
     this.formIsOk = true;
     this.isFetching = true;
     if (this.inputOk()) {
-      const body = { username: this.mail, password: this.password};
-      this.http
-      .post<LoginResponse>('http://localhost:1339/login', body)
-      .subscribe(
-        data => {
-          AuthenticationService.startSession(data.user,data.token);
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 1000);
-        },
-        err => {
-          this.formIsOk = false;
-          this.isFetching = false;
-          ErrorsService.addErrorOnHTML("Login ou mot de passe incorrect");
+        this.userService.login(this.mail, this.password)
+        .subscribe(
+          data => {
+            SessionService.startSession(data.user,data.token);
+            setTimeout(() => {
+              this.router.navigate(['/dashboard']);
+            }, 1000);
+          },
+          err => {
+            this.formIsOk = false;
+            this.isFetching = false;
+            ErrorsService.addErrorOnHTML("Login ou mot de passe incorrect");
         });
-      } else {
+    } 
+    else {
         this.isFetching = false;
         this.formIsOk = false;
     }
+
   }
 
   inputOk(): boolean {

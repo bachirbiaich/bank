@@ -6,7 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 /*Services*/
 import { ErrorsService } from './Services/errors/errors.service';
-import { AuthenticationService } from './Services/authentication/authentication.service';
+import { SessionService } from './Services/session/session.service';
+import { ApiService } from './Services/api/api.service';
+import { UserService } from './Services/api/user/user.service';
 
 /*Components*/
 import { AppComponent } from './app.component';
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ErrorsService, AuthenticationService],
+  providers: [ErrorsService, SessionService, ApiService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

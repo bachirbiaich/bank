@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../Classes/user';
 
 @Injectable()
-export class AuthenticationService {
+export class SessionService {
 
   constructor() { }
 
@@ -21,7 +21,7 @@ export class AuthenticationService {
   }
 
   static getLoggedInUser():User|boolean{
-    if(AuthenticationService.isLoggedIn()){
+    if(SessionService.isLoggedIn()){
       const jsonUser = JSON.parse(sessionStorage.getItem('user'));
       return new User(jsonUser._id,jsonUser.firstname,jsonUser.lastname,jsonUser.mail,jsonUser.password);
     }

@@ -1,4 +1,4 @@
-import { User } from '../Classes/user';
+import { User } from '../../../Classes/user';
 
 export interface LoginResponse {
     user:User,
