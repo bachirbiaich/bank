@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { Router } from '@angular/router';
+import { SessionService } from '../../Services/session/session.service';
 
 export class JwtInterceptor implements HttpInterceptor {
 
@@ -21,7 +22,8 @@ export class JwtInterceptor implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status === 401) {
+        if (err.status === 401 || err.status === 0) { 
+          SessionService.endSession();
           this.router.navigate(['/login']);
         }
       }

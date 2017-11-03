@@ -1,10 +1,12 @@
 export class Compte{
+    _id:string;
     owner_id:string;
     solde:Number;
-    creation_date:Date;
+    creation_date:Number;
     iban:string;
 
-    constructor(owner_id:string, solde:Number, creation_date:Date, iban:string){
+    constructor(_id:string, owner_id:string, solde:Number, creation_date:Number, iban:string){
+        this._id = _id;
         this.owner_id = owner_id;
         this.solde = solde;
         this.creation_date = creation_date;

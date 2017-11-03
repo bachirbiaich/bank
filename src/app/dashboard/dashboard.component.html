@@ -2,6 +2,26 @@
 <div class="superContentBloc">
     <h4 class="title">Mouvements</h4>
   <div class="contentBloc">
-
+      <span id="compteLabel">Compte</span><br/>
+      <select class="form-control" id="" name="compte">
+        <option *ngFor="let compte of comptes">IBAN: {{compte.iban}} - Solde: {{compte.solde}}€</option>
+      </select>
+      <span id="mouvementsLabel">Mouvements</span><br/>
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Montant</th>
+              <th>Libelle</th>
+            </tr>
+          </thead>
+          <tbody>     
+            <tr *ngFor="let mouvement of mouvements" [ngClass]="{'success': mouvement.montant>0 , 'danger': mouvement.montant<0}">
+              <td>{{mouvement.date}}</td>
+              <td>{{mouvement.montant}}</td>
+              <td>{{mouvement.libelle}}</td>
+            </tr>
+          </tbody>
+        </table>
   </div>
 </div>

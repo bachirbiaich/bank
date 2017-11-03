@@ -22,8 +22,6 @@ export class MenuComponent implements OnInit {
   user:User;
 
   constructor(private router: Router) {
-    if(!SessionService.isLoggedIn())
-      this.router.navigate(['/login']);
     this.currentRoute = this.router.url;
     this.user = SessionService.getLoggedInUser();
   }

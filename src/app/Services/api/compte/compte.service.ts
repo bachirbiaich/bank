@@ -3,7 +3,7 @@ import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SessionService } from '../../../Services/session/session.service';
-import { Compte } from '../../../Classes/compte';
+import { GetComptesResponse } from '../Interfaces/GetComptesResponse';
 
 @Injectable()
 export class CompteService extends ApiService{
@@ -12,8 +12,7 @@ export class CompteService extends ApiService{
     super();
    }
   
-  getCompteByUserId(_id:string): Observable<Array<Compte>>{
-    const body = { user: { _id: _id } };
-    return this.http.get<Array<Compte>>(`${this.apiURI}/api/getcomptes`);
+  getComptes(): Observable<GetComptesResponse>{
+    return this.http.get<GetComptesResponse>(`${this.apiURI}/api/getcomptes`);
   }
 }

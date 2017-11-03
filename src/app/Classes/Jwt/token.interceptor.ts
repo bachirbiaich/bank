@@ -14,9 +14,8 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+
     if(SessionService.isLoggedIn()){
-        console.log('header');
         request = request.clone({
         setHeaders: {
             Authorization: `Bearer ${SessionService.getToken()}`

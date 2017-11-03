@@ -14,6 +14,7 @@ import { SessionService } from './Services/session/session.service';
 import { ApiService } from './Services/api/api.service';
 import { UserService } from './Services/api/user/user.service';
 import { CompteService } from './Services/api/compte/compte.service';
+import { MouvementService } from './Services/api/mouvement/mouvement.service';
 
 /*Components*/
 import { AppComponent } from './app.component';
@@ -51,6 +52,8 @@ const appRoutes: Routes = [
     SessionService, 
     ApiService, 
     UserService, 
+    CompteService,
+    MouvementService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

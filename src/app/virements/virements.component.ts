@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SessionService } from '../Services/session/session.service';
 
 @Component({
   selector: 'bc-virements',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VirementsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) {}
 
   ngOnInit() {
+    if(!SessionService.isLoggedIn())
+      this.router.navigate(['/login']);
   }
 
 }
