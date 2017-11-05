@@ -14,6 +14,9 @@ export class VirementsComponent implements OnInit {
   ngOnInit() {
     if(!SessionService.isLoggedIn())
       this.router.navigate(['/login']);
+    else {
+      //manip a faire ici
+    }
   }
 
 }

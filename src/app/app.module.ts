@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { VirementsComponent } from './virements/virements.component';
+import { OrderByPipe } from './Pipes/order-by.pipe';
 
 
 
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     MenuComponent,
     VirementsComponent,
+    OrderByPipe,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
