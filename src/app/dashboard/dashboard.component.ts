@@ -13,107 +13,105 @@ import { ErrorsService } from '../Services/errors/errors.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  comptes:Array<Compte> = [];
-  mouvements:Array<Mouvement> = [];
-  idCompteSelectionne:string;
-  soldeAVenir:number;
-  
-  constructor(private router:Router, private compteService:CompteService, private mouvementService:MouvementService) {
+  comptes: Array<Compte> = [];
+  mouvements: Array<Mouvement> = [];
+  idCompteSelectionne: string;
+  soldeAVenir: number;
+
+  constructor(private router: Router, private compteService: CompteService, private mouvementService: MouvementService) {
   }
 
   ngOnInit() {
-    if(!SessionService.isLoggedIn())
+    if (!SessionService.isLoggedIn()) {
       this.router.navigate(['/login']);
-    else {
+    } else {
       this.compteService.getComptes()
       .subscribe(
         resp => {
-          if(resp.data.length>0){
+          if (resp.data.length > 0) {
             this.comptes = resp.data;
             this.idCompteSelectionne = this.comptes[0]._id;
             this.loadMouvementsPasses();
             this.loadSoldeAVenir();
+          } else {
+            ErrorsService.addErrorOnHTML('Vous ne disposez d\'aucun compte');
           }
-          else
-            ErrorsService.addErrorOnHTML("Vous ne disposez d'aucun compte");
         },
         err => {
-          ErrorsService.addErrorOnHTML("Erreur lors de la récupération des comptes");
+          ErrorsService.addErrorOnHTML('Erreur lors de la récupération des comptes');
       });
     }
   }
 
-  loadMouvementsPasses(){
+  loadMouvementsPasses() {
     this.loadSoldeAVenir();
     ErrorsService.clearErrorsOnHTML();
     this.mouvementService.getMouvementsByCompteId(this.idCompteSelectionne)
     .subscribe(
       resp => {
-        if(resp.data.length>0){
-          const dateActuelle:number = new Date().getTime();
-          //on supprime les évenements à venir
-          for(let i = 0; i<resp.data.length; i++) {
-            if(resp.data[i].date > dateActuelle) {
+        if (resp.data.length > 0) {
+          const dateActuelle: number = new Date().getTime();
+          // on supprime les évenements à venir
+          for (let i = 0; i < resp.data.length; i++) {
+            if (resp.data[i].date > dateActuelle) {
                resp.data.splice(i, 1);
                i--;
             }
           }
-          if(resp.data.length>0)
+          if (resp.data.length > 0) {
             this.mouvements = resp.data;
-          else{
+          } else {
             this.mouvements = [];
-            ErrorsService.addErrorOnHTML("Aucun mouvement passé sur ce compte");
+            ErrorsService.addErrorOnHTML('Aucun mouvement passé sur ce compte');
           }
-        }
-        else{
+        } else {
           this.mouvements = [];
-          ErrorsService.addErrorOnHTML("Aucun mouvement sur ce compte");
+          ErrorsService.addErrorOnHTML('Aucun mouvement sur ce compte');
         }
       },
       err => {
-        ErrorsService.addErrorOnHTML("Erreur lors de la récupération des mouvements du compte");
+        ErrorsService.addErrorOnHTML('Erreur lors de la récupération des mouvements du compte');
     });
   }
 
-  loadMouvementsAVenir(){
+  loadMouvementsAVenir() {
     ErrorsService.clearErrorsOnHTML();
     this.mouvementService.getMouvementsByCompteId(this.idCompteSelectionne)
     .subscribe(
       resp => {
-        if(resp.data.length>0){
-          const dateActuelle:number = new Date().getTime();
-          //on supprime les évenements passés
-          for(let i = 0; i<resp.data.length; i++) {
-            if(resp.data[i].date < dateActuelle) {
+        if (resp.data.length > 0) {
+          const dateActuelle: number = new Date().getTime();
+          // on supprime les évenements passés
+          for (let i = 0; i < resp.data.length; i++) {
+            if (resp.data[i].date < dateActuelle) {
                resp.data.splice(i, 1);
                i--;
             }
           }
-          if(resp.data.length>0)
+          if (resp.data.length > 0) {
             this.mouvements = resp.data;
-          else{
+          } else {
             this.mouvements = [];
-            ErrorsService.addErrorOnHTML("Aucun mouvement à venir sur ce compte");
+            ErrorsService.addErrorOnHTML('Aucun mouvement à venir sur ce compte');
           }
-        }
-        else{
+        } else {
           this.mouvements = [];
-          ErrorsService.addErrorOnHTML("Aucun mouvement sur ce compte");
+          ErrorsService.addErrorOnHTML('Aucun mouvement sur ce compte');
         }
       },
       err => {
-        ErrorsService.addErrorOnHTML("Erreur lors de la récupération des mouvements du compte");
+        ErrorsService.addErrorOnHTML('Erreur lors de la récupération des mouvements du compte');
     });
   }
 
-  private loadSoldeAVenir(){
+  private loadSoldeAVenir() {
     this.mouvementService.getMouvementsByCompteId(this.idCompteSelectionne)
     .subscribe(
       resp => {
-        let soldeAvenir:number = this.getLoadedCompteById(this.idCompteSelectionne).solde.valueOf();
-          const dateActuelle:number = new Date().getTime();
-          for(let i = 0; i<resp.data.length; i++){
-            if(resp.data[i].date > dateActuelle){
+        let soldeAvenir: number = this.getLoadedCompteById(this.idCompteSelectionne).solde.valueOf();
+          const dateActuelle: number = new Date().getTime();
+          for (let i = 0; i < resp.data.length; i++) {
+            if (resp.data[i].date > dateActuelle) {
                soldeAvenir = soldeAvenir.valueOf() + (resp.data[i].montant.valueOf());
             }
           }
@@ -121,11 +119,13 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  private getLoadedCompteById(_id:string):Compte{
-    let compte:Compte = null;
-    for(let i = 0; i<this.comptes.length; i++)
-      if(this.comptes[i]._id == _id)
+  private getLoadedCompteById(_id: string): Compte {
+    let compte: Compte = null;
+    for (let i = 0; i < this.comptes.length; i++) {
+      if (this.comptes[i]._id === _id) {
         compte = this.comptes[i];
+      }
+    }
     return compte;
   }
 

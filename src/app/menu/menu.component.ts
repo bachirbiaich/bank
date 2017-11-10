@@ -14,7 +14,8 @@ export class MenuComponent implements OnInit {
 
   menuItems:any = [
     {'name':'Mouvements','route':'/dashboard','faIconClass':'line-chart'},
-    {'name':'Virements','route':'/virements','faIconClass':'university'}
+    {'name':'Virements','route':'/virements','faIconClass':'university'},
+    {'name':'Chat','route':'/chat','faIconClass':'university'}
   ];
 
   currentRoute:string;

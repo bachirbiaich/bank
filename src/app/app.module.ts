@@ -24,11 +24,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { VirementsComponent } from './virements/virements.component';
 import { OrderByPipe } from './Pipes/order-by.pipe';
+import { ChatComponent } from './chat/chat.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'virements', component: VirementsComponent },
+  { path: 'chat', component: ChatComponent },
   { path: '**', redirectTo: 'login'}
 ];
 
@@ -40,6 +42,7 @@ const appRoutes: Routes = [
     MenuComponent,
     VirementsComponent,
     OrderByPipe,
+    ChatComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

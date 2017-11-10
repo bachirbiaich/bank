@@ -1,0 +1,13 @@
+<bc-menu></bc-menu>
+<div class="superContentBloc">
+  <h4 class="title">Chat</h4>
+  <div class="contentBloc">
+    <ul id="messages">
+      <li *ngFor="let message of messageList">{{ message }}</li>
+    </ul>
+    <form action="">
+      <input [(ngModel)]="message" name="message" autocomplete="off" />
+      <button (click)="sendMessage(message)">Send</button>
+    </form>
+  </div>
+</div>
