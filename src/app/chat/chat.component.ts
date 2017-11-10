@@ -28,7 +28,8 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     console.log('send Message : ' + this.message);
-    this.socket.emit('emit', `${this.user.firstname} ${this.user.firstname} : ${this.message}`);
+    if(this.message)
+      this.socket.emit('emit', `${this.user.firstname} ${this.user.lastname} : ${this.message}`);
   }
 
   ngOnInit() {

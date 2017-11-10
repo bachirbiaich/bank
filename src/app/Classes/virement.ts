@@ -17,7 +17,7 @@ export class Virement {
             alert('Veuillez entrer un montant supérieur à 0.');
             return false;
         }
-        if (!this.recipient_iban || (this.recipient_iban.length !== 16)) {
+        if (!this.recipient_iban || (this.recipient_iban.length !== 27)) {
             alert('IBAN invalide');
             return false;
         }

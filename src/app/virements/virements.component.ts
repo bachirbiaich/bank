@@ -35,6 +35,7 @@ export class VirementsComponent implements OnInit {
   }
 
   validVirement(virement: Virement) {
+    virement.recipient_iban = virement.recipient_iban.replace(/\s/g,'');
     if (virement.isValid()) {
       this.virementService.addVirements(virement)
       .subscribe(resp => {
