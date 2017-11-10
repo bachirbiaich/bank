@@ -36,10 +36,12 @@ export class VirementsComponent implements OnInit {
 
   validVirement(virement: Virement) {
     if (virement.isValid()) {
-      virement.done = true;
       this.virementService.addVirements(virement)
-        .subscribe(resp => {
-          console.log(resp);
+      .subscribe(resp => {
+        console.log(resp);
+        if (!resp.hasErrors) {
+          virement.done = true;
+        }
         });
     }
   }
