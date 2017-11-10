@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from '../Services/session/session.service';
+import { Virement } from '../Classes/virement';
+import { VirementService } from '../Services/api/virement/virement.service';
 
 @Component({
   selector: 'bc-virements',
@@ -9,14 +11,39 @@ import { SessionService } from '../Services/session/session.service';
 })
 export class VirementsComponent implements OnInit {
 
-  constructor(private router:Router) {}
+  virements: Array<Virement> = [];
+
+  constructor(private router: Router, private virementService: VirementService) { }
 
   ngOnInit() {
-    if(!SessionService.isLoggedIn())
+    if (!SessionService.isLoggedIn()) {
       this.router.navigate(['/login']);
-    else {
-      //manip a faire ici
+    } else {
+      this.virementService.getVirements()
+        .subscribe(resp => {
+          resp.data.map(element => {
+            this.virements.push(new Virement(element.recipient_iban, element.montant, element.sender_id, element.date));
+          });
+        });
+      console.log(this.virements);
+    }
+
+  }
+
+  addVirement() {
+    this.virements.push(new Virement('', 0, '', new Date().getTime(), false));
+  }
+
+  validVirement(virement: Virement) {
+    if (virement.isValid()) {
+      virement.done = true;
+      this.virementService.addVirements(virement)
+        .subscribe(resp => {
+          console.log(resp);
+        });
     }
   }
 
+  createVirement() {
+  }
 }

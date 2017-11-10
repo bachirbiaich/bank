@@ -15,6 +15,7 @@ import { ApiService } from './Services/api/api.service';
 import { UserService } from './Services/api/user/user.service';
 import { CompteService } from './Services/api/compte/compte.service';
 import { MouvementService } from './Services/api/mouvement/mouvement.service';
+import { VirementService } from './Services/api/virement/virement.service';
 
 /*Components*/
 import { AppComponent } from './app.component';
@@ -23,9 +24,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { VirementsComponent } from './virements/virements.component';
 import { OrderByPipe } from './Pipes/order-by.pipe';
-
-
-
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,15 +45,16 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
-    ErrorsService, 
-    SessionService, 
-    ApiService, 
-    UserService, 
+    ErrorsService,
+    SessionService,
+    ApiService,
+    UserService,
     CompteService,
     MouvementService,
+    VirementService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
